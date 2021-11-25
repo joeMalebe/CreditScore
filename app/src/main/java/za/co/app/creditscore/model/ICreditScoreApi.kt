@@ -1,4 +1,4 @@
-package za.co.app.creditscore
+package za.co.app.creditscore.model
 
 import retrofit2.Response
 import retrofit2.http.GET

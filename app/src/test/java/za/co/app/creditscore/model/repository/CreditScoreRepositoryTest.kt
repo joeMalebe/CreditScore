@@ -1,14 +1,6 @@
 package za.co.app.creditscore.model.repository
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlinx.coroutines.runBlocking
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert
 import org.junit.Before
@@ -17,11 +9,9 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.stub
 import retrofit2.Response
-import za.co.app.creditscore.ICreditScoreApi
+import za.co.app.creditscore.model.ICreditScoreApi
 import za.co.app.creditscore.model.CreditScoreModel
-import za.co.app.creditscore.ui.domain.CreditScore
 
 @RunWith(MockitoJUnitRunner::class)
 class CreditScoreRepositoryTest {
