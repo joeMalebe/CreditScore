@@ -15,8 +15,7 @@ class CreditScoreRepository @Inject constructor(private val creditScoreApi: ICre
         return CoroutineScope(IO).async {
             val response = creditScoreApi.getCreditScoreDetails()
             if (response.isSuccessful && response.body() != null) {
-                val creditScoreModel = response.body()!!
-                CreditScoreMapper.mapCreditScore(creditScoreModel)
+                CreditScoreMapper.mapCreditScore(response.body()!!)
             } else {
                 null
             }
