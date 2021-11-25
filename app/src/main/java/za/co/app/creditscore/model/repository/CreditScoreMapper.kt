@@ -10,6 +10,5 @@ object CreditScoreMapper {
             creditScoreDetails?.score ?: 0,
             creditScoreDetails?.maxScoreValue ?: 0
         )
-
     }
 }
