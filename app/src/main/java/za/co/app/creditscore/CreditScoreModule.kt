@@ -7,7 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import za.co.app.creditscore.ICreditScoreService.Companion.API_BASE_URL
+import za.co.app.creditscore.ICreditScoreApi.Companion.API_BASE_URL
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -17,12 +17,12 @@ object CreditScoreModule {
 
     @Provides
     @Singleton
-    fun userApiService(): ICreditScoreService {
+    fun userApiService(): ICreditScoreApi {
         return Retrofit.Builder()
             .baseUrl(API_BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient())
-            .build().create(ICreditScoreService::class.java)
+            .build().create(ICreditScoreApi::class.java)
     }
 
     private fun okHttpClient() = OkHttpClient().newBuilder()

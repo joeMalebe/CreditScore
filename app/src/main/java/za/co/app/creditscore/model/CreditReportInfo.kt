@@ -3,11 +3,11 @@ package za.co.app.creditscore.model
 import com.squareup.moshi.Json
 
 data class CreditReportInfo (
-    val score: Long? = null,
+    val score: Int? = null,
     val scoreBand: Long? = null,
     val clientRef: String? = null,
     val status: String? = null,
-    val maxScoreValue: Long? = null,
+    val maxScoreValue: Int? = null,
     val minScoreValue: Long? = null,
     val monthsSinceLastDefaulted: Long? = null,
     val hasEverDefaulted: Boolean? = null,
