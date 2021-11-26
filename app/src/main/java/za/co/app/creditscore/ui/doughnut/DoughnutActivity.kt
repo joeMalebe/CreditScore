@@ -91,7 +91,7 @@ class DoughnutActivity : AppCompatActivity() {
 
     @Composable
     fun Doughnut(creditScore: CreditScore) {
-        Box(modifier = Modifier.padding(dimensionResource(id = R.dimen.gutterSpace))) {
+        Box(contentAlignment = Alignment.Center , modifier = Modifier.padding(dimensionResource(id = R.dimen.gutterSpace)).fillMaxSize()) {
             Box(
                 contentAlignment = Alignment.Center, modifier = Modifier.border(
                     dimensionResource(id = R.dimen.outer_stroke_width), color = Color.Black,
