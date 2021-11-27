@@ -1,4 +1,4 @@
-package za.co.app.creditscore.ui
+package za.co.app.creditscore.ui.doughnut
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
