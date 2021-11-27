@@ -2,26 +2,26 @@ package za.co.app.creditscore.ui.doughnut
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.annotation.DimenRes
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.drawscope.DrawStyle
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -58,7 +58,7 @@ class DoughnutActivity : AppCompatActivity() {
                 fontSize = 72.sp,
                 textAlign = TextAlign.Center,
                 color = colorResource(
-                    id = (R.color.gold)
+                    id = (R.color.colorAccent)
                 ),
                 fontWeight = FontWeight.Thin
             )
@@ -78,7 +78,7 @@ class DoughnutActivity : AppCompatActivity() {
                 .size(dimensionResource(id = R.dimen.progress_bar_size))
                 .padding(dimensionResource(id = R.dimen.gutterSpaceHalf)),
             color =  colorResource(
-                id = R.color.gold
+                id = R.color.colorAccent
             )
         )
     }
@@ -86,26 +86,53 @@ class DoughnutActivity : AppCompatActivity() {
     @Preview
     @Composable
     fun Preview() {
-        Doughnut(CreditScore(511, 700, null))
+        MainLayout(CreditScore(511, 700, null))
     }
 
     @Composable
     fun Doughnut(creditScore: CreditScore) {
         Box(contentAlignment = Alignment.Center , modifier = Modifier
-            .padding(dimensionResource(id = R.dimen.gutterSpace))
-            .fillMaxSize()) {
+            .padding(dimensionResource(id = R.dimen.gutterSpace))) {
             Box(
-                contentAlignment = Alignment.Center, modifier = Modifier.border(
-                    dimensionResource(id = R.dimen.outer_stroke_width), color = Color.Black,
-                    CircleShape
-                ).clickable {
-                  startActivity(CreditReportActivity.getStartIntent(this@DoughnutActivity, creditScore))
-                }
+                contentAlignment = Alignment.Center, modifier = Modifier
+                    .border(
+                        dimensionResource(id = R.dimen.outer_stroke_width), color = Color.Black,
+                        CircleShape
+                    )
+                    .clickable {
+                        startActivity(
+                            CreditReportActivity.getStartIntent(
+                                this@DoughnutActivity,
+                                creditScore
+                            )
+                        )
+                    }
             ) {
                 ProgressBar(creditScore)
                 InnerText(creditScore)
             }
         }
+    }
+
+    @Composable
+    fun MainLayout(creditScore: CreditScore) {
+        Scaffold(topBar = {
+            TopAppBar(title = {
+                Text(text = stringResource(id = R.string.clear_score))
+            })
+        }, content = {
+            Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally , modifier = Modifier.fillMaxSize().background(brush = Brush.linearGradient(
+                listOf(
+                    colorResource(id = R.color.background),
+                    colorResource(id = R.color.background2),
+                    colorResource(id = R.color.background3),
+                    colorResource(id = R.color.background4),
+                    colorResource(id = R.color.silver))))){
+
+                Doughnut(creditScore = creditScore)
+            }
+
+        })
     }
 
     @Composable
@@ -130,7 +157,7 @@ class DoughnutActivity : AppCompatActivity() {
 
             is DoughnutViewState.CreditScoreLoaded -> {
                 setContent {
-                    Doughnut(creditScore = viewState.creditScore)
+                    MainLayout(creditScore = viewState.creditScore)
                 }
             }
         }

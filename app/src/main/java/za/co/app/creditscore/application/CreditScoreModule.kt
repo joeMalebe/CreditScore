@@ -1,4 +1,4 @@
-package za.co.app.creditscore
+package za.co.app.creditscore.application
 
 import dagger.Module
 import dagger.Provides
