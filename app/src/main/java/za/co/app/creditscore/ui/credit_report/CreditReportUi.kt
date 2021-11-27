@@ -26,7 +26,7 @@ import za.co.app.creditscore.ui.doughnut.ui.theme.Typography
 
 @Composable
 fun TextWithValue(label: String = "Credit", value: String = "455") {
-    if(value.equals("null")) return
+    if(value == "null") return
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -44,8 +44,7 @@ fun TextWithValue(label: String = "Credit", value: String = "455") {
 
 @Composable
 fun CreditScoreSection(creditScore: CreditScore) {
-    Column(
-    ) {
+    Column {
         Text(text = creditScore.score.toString(), fontSize = 72.sp)
         Row(modifier = Modifier.padding(start = dimensionResource(id = R.dimen.gutterSpaceHalf)
         )) {
@@ -107,7 +106,7 @@ private fun DebtCard(debt: Debt, heading: String = "Card title") {
             )
         )
 
-        Card() {
+        Card {
             Column(
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(id = R.dimen.gutterSpace)
@@ -143,7 +142,7 @@ fun Doughnut(creditScore: CreditScore) {
                 )
         ) {
             ProgressBar(creditScore)
-            InnerText(creditScore)
+            InnerText()
         }
     }
 }
@@ -162,7 +161,7 @@ fun ProgressBar(creditScore: CreditScore) {
 }
 
 @Composable
-fun InnerText(creditScore: CreditScore) {
+fun InnerText() {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
