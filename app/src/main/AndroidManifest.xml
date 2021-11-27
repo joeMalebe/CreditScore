@@ -17,13 +17,10 @@
             android:exported="false"
             android:label="@string/title_activity_credit_report"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.doughnut.MainActivity"
-            android:exported="false"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ui.doughnut.DoughnutActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

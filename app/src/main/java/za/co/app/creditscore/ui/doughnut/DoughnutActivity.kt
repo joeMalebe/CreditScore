@@ -10,10 +10,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +29,7 @@ import za.co.app.creditscore.R
 import za.co.app.creditscore.ui.CreditScoreViewModel
 import za.co.app.creditscore.ui.credit_report.CreditReportActivity
 import za.co.app.creditscore.ui.domain.CreditScore
+import za.co.app.creditscore.ui.doughnut.ui.theme.Typography
 
 @AndroidEntryPoint
 class DoughnutActivity : AppCompatActivity() {
@@ -40,8 +38,6 @@ class DoughnutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
         viewModel.viewState.observe(this, { viewState -> renderViewState(viewState) })
         viewModel.loadCreditScore()
     }
@@ -121,13 +117,19 @@ class DoughnutActivity : AppCompatActivity() {
                 Text(text = stringResource(id = R.string.clear_score))
             })
         }, content = {
-            Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally , modifier = Modifier.fillMaxSize().background(brush = Brush.linearGradient(
-                listOf(
-                    colorResource(id = R.color.background),
-                    colorResource(id = R.color.background2),
-                    colorResource(id = R.color.background3),
-                    colorResource(id = R.color.background4),
-                    colorResource(id = R.color.silver))))){
+            Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally , modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.linearGradient(
+                        listOf(
+                            colorResource(id = R.color.background),
+                            colorResource(id = R.color.background2),
+                            colorResource(id = R.color.background3),
+                            colorResource(id = R.color.background4),
+                            colorResource(id = R.color.silver)
+                        )
+                    )
+                )){
 
                 Doughnut(creditScore = creditScore)
             }
@@ -138,21 +140,94 @@ class DoughnutActivity : AppCompatActivity() {
     @Composable
     @Preview
     fun Loading() {
-        Box (modifier = Modifier.fillMaxSize()){
-            CircularProgressIndicator(color = colorResource(id = R.color.colorPrimary), modifier = Modifier.size(
-                dimensionResource(id = R.dimen.loader_size)))
-        }
+        Scaffold(topBar = {
+            TopAppBar(title = {
+                Text(text = stringResource(id = R.string.clear_score))
+            })
+        }, content = {
+            Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally , modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.linearGradient(
+                        listOf(
+                            colorResource(id = R.color.background),
+                            colorResource(id = R.color.background2),
+                            colorResource(id = R.color.background3),
+                            colorResource(id = R.color.background4),
+                            colorResource(id = R.color.silver)
+                        )
+                    )
+                )){
 
+                Box (contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()){
+                    CircularProgressIndicator(color = colorResource(id = R.color.colorPrimary), modifier = Modifier.size(
+                        dimensionResource(id = R.dimen.loader_size)))
+                }
+            }
+        })
+    }
+
+    @Composable
+    @Preview
+    fun Error() {
+        Scaffold(topBar = {
+            TopAppBar(title = {
+                Text(text = stringResource(id = R.string.clear_score))
+            })
+        }, content = {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.linearGradient(
+                            listOf(
+                                colorResource(id = R.color.background),
+                                colorResource(id = R.color.background2),
+                                colorResource(id = R.color.background3),
+                                colorResource(id = R.color.background4),
+                                colorResource(id = R.color.silver)
+                            )
+                        )
+                    )
+            ) {
+
+                MaterialTheme {
+                    Column {
+                        AlertDialog(title = {
+                            Text(
+                                text = stringResource(id = R.string.error_message),
+                                style = Typography.h6
+                            )
+                        }, text = {
+                            Text(
+                                text = stringResource(id = R.string.please_try_again_later),
+                                style = Typography.h6
+                            )
+                        }, onDismissRequest = {}, confirmButton = {
+                            Button(onClick = { finish() }) {
+                                Text("Ok")
+                            }
+                        })
+                    }
+                }
+            }
+        })
     }
 
     private fun renderViewState(viewState: DoughnutViewState) {
         when (viewState) {
             is DoughnutViewState.Loading -> {
-
+                setContent {
+                    Loading()
+                }
             }
 
             is DoughnutViewState.Error -> {
-
+                setContent {
+                    Error()
+                }
             }
 
             is DoughnutViewState.CreditScoreLoaded -> {

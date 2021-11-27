@@ -7,9 +7,7 @@ import android.util.Log
 import androidx.activity.compose.setContent
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -48,7 +46,6 @@ class CreditReportActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (intent.extras != null && intent.extras!!.get(EXTRA_CREDIT_SCORE) != null) {
-
             val creditScore = intent!!.extras!!.get(EXTRA_CREDIT_SCORE) as CreditScore
             setContent {
                 MainLayout(creditScore = creditScore)
@@ -58,6 +55,7 @@ class CreditReportActivity : AppCompatActivity() {
 
     @Composable
     fun TextWithValue(label: String = "Credit", value: String = "455") {
+        if(value.equals("null")) return
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -77,7 +75,6 @@ class CreditReportActivity : AppCompatActivity() {
     fun CreditScoreSection(creditScore: CreditScore) {
         Column(
         ) {
-
             Text(text = creditScore.score.toString(), fontSize = 72.sp)
             Row(modifier = Modifier.padding(start = dimensionResource(id = R.dimen.gutterSpaceHalf)
                 )) {
@@ -92,6 +89,7 @@ class CreditReportActivity : AppCompatActivity() {
                     fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = dimensionResource(id = R.dimen.off_set_2))
                 )
             }
+
             if (creditScore.creditInfo?.equifaxScoreBandDescription != null) {
                 Text(
                     text = creditScore.creditInfo.equifaxScoreBandDescription,
@@ -106,15 +104,18 @@ class CreditReportActivity : AppCompatActivity() {
                     )
                 )
             }
-
         }
     }
 
     @Composable
     fun CreditInfoSection(creditInfo: CreditInfo) {
-        Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.SpaceEvenly) {
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(
+                rememberScrollState()
+            ), verticalArrangement = Arrangement.SpaceEvenly) {
             DebtCard(creditInfo.shortTermDebt, "Short Term")
-            DebtCard(creditInfo.shortTermDebt, "Long Term")
+            DebtCard(creditInfo.longTermDebt, "Long Term")
         }
     }
 
@@ -211,44 +212,42 @@ class CreditReportActivity : AppCompatActivity() {
 
     @Composable
     fun MainLayout(creditScore: CreditScore) {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.linearGradient(
-                    listOf(
-                        colorResource(id = R.color.background),
-                        colorResource(id = R.color.background2),
-                        colorResource(id = R.color.background3),
-                        colorResource(id = R.color.background4),
-                        colorResource(id = R.color.silver)
-                    )
-                )
-            ), verticalArrangement = Arrangement.Top) {
-            HeaderSection(creditScore = creditScore)
-            if(creditScore.creditInfo != null) {
-                Divider(Modifier.padding(vertical = dimensionResource(id = R.dimen.gutterSpaceHalf)))
-                CreditInfoSection(creditInfo = creditScore.creditInfo)
+
+        Scaffold(topBar = {
+            TopAppBar(title = {
+                Text(text = stringResource(id = R.string.credit_info))
+            })
+        }, content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.linearGradient(
+                            listOf(
+                                colorResource(id = R.color.background),
+                                colorResource(id = R.color.background2),
+                                colorResource(id = R.color.background3),
+                                colorResource(id = R.color.background4),
+                                colorResource(id = R.color.silver)
+                            )
+                        )
+                    ), verticalArrangement = Arrangement.Top
+            ) {
+                HeaderSection(creditScore = creditScore)
+
+                if (creditScore.creditInfo != null) {
+                    Divider(Modifier.padding(vertical = dimensionResource(id = R.dimen.gutterSpaceHalf)))
+                    CreditInfoSection(creditInfo = creditScore.creditInfo)
+                }
             }
-        }
+
+        })
     }
 
     @Composable
     @Preview
     fun Preview() {
         val creditScore = CreditScore(557, 700, CreditInfo())
-        //CreditScoreSection(CreditScore(557, 700, CreditInfo()))
-        //CreditInfoSection(creditInfo = CreditInfo())
-        //Doughnut(creditScore = CreditScore(557, 700, CreditInfo()))
-        //HeaderSection(creditScore)
-        Scaffold(topBar = {
-            TopAppBar(title = {
-                Text(text = stringResource(id = R.string.credit_info))
-            })
-        }, content = {
-            MainLayout(creditScore = creditScore)
-
-        })
+        MainLayout(creditScore = creditScore)
     }
-
-
 }

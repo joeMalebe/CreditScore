@@ -5,7 +5,7 @@
     <dimen name="progress_bar_size">238dp</dimen>
     <dimen name="small_progress_bar_size">144dp</dimen>
     <dimen name="gutterSpaceHalf">8dp</dimen>
-    <dimen name="loader_size">48dp</dimen>
+    <dimen name="loader_size">72dp</dimen>
     <dimen name="big_text">72sp</dimen>
     <dimen name="off_set_4">4dp</dimen>
     <dimen name="off_set_2">2dp</dimen>
