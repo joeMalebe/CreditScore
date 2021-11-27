@@ -24,7 +24,8 @@ internal class CreditScoreMapperTest {
             currentShortTermNonPromotionalDebt = 12,
             equifaxScoreBandDescription = "Good",
             numNegativeScoreFactors = 3,
-            numPositiveScoreFactors = 1
+            numPositiveScoreFactors = 1,
+            percentageCreditUsed = 76
         )
 
         val model = CreditScoreModel(creditReportInfo = reportInfo)
@@ -41,6 +42,7 @@ internal class CreditScoreMapperTest {
         Assert.assertEquals("Good", creditInfo.equifaxScoreBandDescription)
         Assert.assertEquals(3, creditInfo.negativeScoreFactors)
         Assert.assertEquals(1, creditInfo.positiveScoreFactors)
+        Assert.assertEquals(76, creditInfo.creditPercentageUsed)
 
         assertDebt(creditInfo.longTermDebt, 1232L, 300, 6677, 900)
         assertDebt(creditInfo.shortTermDebt, 23333, 61111, 866, 12)
@@ -68,6 +70,7 @@ internal class CreditScoreMapperTest {
         val info = creditScore.creditInfo
         Assert.assertEquals(0, info?.positiveScoreFactors)
         Assert.assertEquals(0, info?.negativeScoreFactors)
+        Assert.assertEquals(0, info?.creditPercentageUsed)
         Assert.assertEquals("Unknown", info?.equifaxScoreBandDescription)
     }
 }

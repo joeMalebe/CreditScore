@@ -6,9 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-import za.co.app.creditscore.model.repository.CreditScoreRepository
 import za.co.app.creditscore.model.repository.ICreditScoreRepository
-import za.co.app.creditscore.ui.doughnut.DoughnutViewState
 import javax.inject.Inject
 
 @HiltViewModel

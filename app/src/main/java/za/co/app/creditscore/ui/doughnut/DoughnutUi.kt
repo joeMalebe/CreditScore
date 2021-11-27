@@ -1,6 +1,5 @@
 package za.co.app.creditscore.ui.doughnut
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -20,7 +19,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import za.co.app.creditscore.R
-import za.co.app.creditscore.ui.credit_report.CreditReportActivity
 import za.co.app.creditscore.ui.domain.CreditScore
 import za.co.app.creditscore.ui.doughnut.ui.theme.Typography
 

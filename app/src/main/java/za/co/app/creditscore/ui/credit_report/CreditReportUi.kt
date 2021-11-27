@@ -142,7 +142,7 @@ fun Doughnut(creditScore: CreditScore) {
                 )
         ) {
             ProgressBar(creditScore)
-            InnerText()
+            InnerText(creditScore.creditInfo?.creditPercentageUsed ?: 0)
         }
     }
 }
@@ -150,7 +150,7 @@ fun Doughnut(creditScore: CreditScore) {
 @Composable
 fun ProgressBar(creditScore: CreditScore) {
     CircularProgressIndicator(
-        progress = (creditScore.score.toFloat() / creditScore.targetScore.toFloat()),
+        progress = (creditScore.creditInfo?.creditPercentageUsed?.toFloat()?.div(100f) ?: 0f),
         Modifier
             .size(dimensionResource(id = R.dimen.small_progress_bar_size))
             .padding(dimensionResource(id = R.dimen.gutterSpaceHalf)),
@@ -161,14 +161,14 @@ fun ProgressBar(creditScore: CreditScore) {
 }
 
 @Composable
-fun InnerText() {
+fun InnerText(creditPercentageUsed: Int) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Credit used", style = Typography.subtitle2)
         Text(
-            text = "37%",
+            text = "$creditPercentageUsed %",
             style = Typography.subtitle1,
             color = colorResource(
                 id = (R.color.colorAccent)

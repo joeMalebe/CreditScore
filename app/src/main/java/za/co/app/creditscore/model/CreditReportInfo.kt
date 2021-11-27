@@ -13,7 +13,7 @@ data class CreditReportInfo (
     val hasEverDefaulted: Boolean? = null,
     val monthsSinceLastDelinquent: Long? = null,
     val hasEverBeenDelinquent: Boolean? = null,
-    val percentageCreditUsed: Long? = null,
+    val percentageCreditUsed: Int? = null,
     val percentageCreditUsedDirectionFlag: Long? = null,
     val changedScore: Long? = null,
     val currentShortTermDebt: Long? = null,

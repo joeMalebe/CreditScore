@@ -28,7 +28,8 @@ object CreditScoreMapper {
             longTermDebt,
             creditScoreDetails?.numPositiveScoreFactors?.toInt() ?: 0,
             creditScoreDetails?.numNegativeScoreFactors?.toInt() ?: 0,
-            creditScoreDetails?.equifaxScoreBandDescription ?: "Unknown"
+            creditScoreDetails?.equifaxScoreBandDescription ?: "Unknown",
+            creditScoreDetails?.percentageCreditUsed ?: 0
         )
 
         return CreditScore(
