@@ -4,16 +4,11 @@
     <string name="your_credit_score_is">Your credit score is</string>
     <string name="out_of">out of %s</string>
     <string name="title_activity_credit_report">CreditReportActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="credit_info">Credit Score Details</string>
     <string name="clear_score">Clear Score</string>
     <string name="error_message">Could not load credit report</string>
     <string name="please_try_again_later">Please try again later</string>
+    <string name="credit_used">Credit used</string>
+    <string name="short_term">Short Term</string>
+    <string name="long_term">Long Term</string>
 </resources>

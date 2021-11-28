@@ -19,7 +19,7 @@ class CreditScoreViewModel @Inject constructor(private val creditScoreRepository
         viewState.value = DoughnutViewState.Loading
         CoroutineScope(IO).launch {
             val response = creditScoreRepository.getCreditScoreAsync().await()
-            if (response != null) {
+            if (response?.creditInfo != null && response.score != 0 && response.targetScore != 0) {
                 viewState.postValue(DoughnutViewState.CreditScoreLoaded(response))
             } else {
                 viewState.postValue(DoughnutViewState.Error)

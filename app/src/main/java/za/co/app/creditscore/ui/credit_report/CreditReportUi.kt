@@ -84,8 +84,8 @@ fun CreditInfoSection(creditInfo: CreditInfo) {
         .verticalScroll(
             rememberScrollState()
         ), verticalArrangement = Arrangement.SpaceEvenly) {
-        DebtCard(creditInfo.shortTermDebt, "Short Term")
-        DebtCard(creditInfo.longTermDebt, "Long Term")
+        DebtCard(creditInfo.shortTermDebt, stringResource(R.string.short_term))
+        DebtCard(creditInfo.longTermDebt, stringResource(R.string.long_term))
     }
 }
 
@@ -166,7 +166,7 @@ fun InnerText(creditPercentageUsed: Int) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Credit used", style = Typography.subtitle2)
+        Text(text = stringResource(R.string.credit_used), style = Typography.subtitle2)
         Text(
             text = "$creditPercentageUsed %",
             style = Typography.subtitle1,
