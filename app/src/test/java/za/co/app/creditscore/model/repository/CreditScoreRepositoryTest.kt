@@ -46,7 +46,9 @@ class CreditScoreRepositoryTest {
         )
 
         val response = repository.getCreditScoreAsync().await()
-        Assert.assertNull(response)
+        Assert.assertEquals(0,response?.score)
+        Assert.assertEquals(0,response?.targetScore)
+        Assert.assertNull(response?.creditInfo)
 
     }
 

@@ -16,7 +16,7 @@ class CreditScoreRepository @Inject constructor(private val creditScoreApi: ICre
             if (response.isSuccessful && response.body() != null) {
                 CreditScoreMapper.mapCreditScore(response.body()!!)
             } else {
-                null
+                CreditScore(creditInfo = null)
             }
         }
     }
