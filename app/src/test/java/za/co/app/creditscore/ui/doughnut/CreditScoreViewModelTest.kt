@@ -44,7 +44,7 @@ class CreditScoreViewModelTest {
         viewModel.viewState.observeForever {
             stateList.add(it)
         }
-        Thread.sleep(1000)
+        Thread.sleep(3000)
         Assert.assertEquals(DoughnutViewState.Loading, stateList[0])
         Assert.assertEquals(DoughnutViewState.CreditScoreLoaded(score), stateList[1])
     }
@@ -63,7 +63,7 @@ class CreditScoreViewModelTest {
             stateList.add(it)
         }
 
-        Thread.sleep(1000)
+        Thread.sleep(3000)
         Assert.assertEquals(DoughnutViewState.Loading, stateList[0])
         Assert.assertEquals(DoughnutViewState.Error, stateList[1])
     }
