@@ -5,7 +5,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import za.co.app.creditscore.model.ICreditScoreApi
-import za.co.app.creditscore.ui.domain.CreditScore
+import za.co.app.creditscore.ui.models.CreditScore
 import javax.inject.Inject
 
 class CreditScoreRepository @Inject constructor(private val creditScoreApi: ICreditScoreApi) :
@@ -16,7 +16,7 @@ class CreditScoreRepository @Inject constructor(private val creditScoreApi: ICre
             if (response.isSuccessful && response.body() != null) {
                 CreditScoreMapper.mapCreditScore(response.body()!!)
             } else {
-                null
+                CreditScore(creditInfo = null)
             }
         }
     }

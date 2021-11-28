@@ -1,4 +1,4 @@
-package za.co.app.creditscore
+package za.co.app.creditscore.application
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

@@ -10,8 +10,8 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 import retrofit2.Response
-import za.co.app.creditscore.model.ICreditScoreApi
 import za.co.app.creditscore.model.CreditScoreModel
+import za.co.app.creditscore.model.ICreditScoreApi
 
 @RunWith(MockitoJUnitRunner::class)
 class CreditScoreRepositoryTest {
@@ -46,8 +46,8 @@ class CreditScoreRepositoryTest {
         )
 
         val response = repository.getCreditScoreAsync().await()
-        Assert.assertNull(response)
-
+        Assert.assertEquals(0, response?.score)
+        Assert.assertEquals(0, response?.targetScore)
+        Assert.assertNull(response?.creditInfo)
     }
-
 }

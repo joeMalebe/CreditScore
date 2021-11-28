@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">CreditScore</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="your_credit_score_is">Your credit score is</string>
+    <string name="out_of">out of %s</string>
+    <string name="title_activity_credit_report">CreditReportActivity</string>
+    <string name="credit_info">Credit Score Details</string>
+    <string name="clear_score">Clear Score</string>
+    <string name="error_message">Could not load credit report</string>
+    <string name="please_try_again_later">Please try again later</string>
+    <string name="credit_used">Credit used</string>
+    <string name="short_term">Short Term</string>
+    <string name="long_term">Long Term</string>
 </resources>

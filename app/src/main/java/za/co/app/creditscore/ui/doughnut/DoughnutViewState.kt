@@ -1,6 +1,6 @@
 package za.co.app.creditscore.ui.doughnut
 
-import za.co.app.creditscore.ui.domain.CreditScore
+import za.co.app.creditscore.ui.models.CreditScore
 
 interface DoughnutViewState {
 
