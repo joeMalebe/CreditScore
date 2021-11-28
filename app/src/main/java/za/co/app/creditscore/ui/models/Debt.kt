@@ -1,4 +1,4 @@
-package za.co.app.creditscore.ui.domain
+package za.co.app.creditscore.ui.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

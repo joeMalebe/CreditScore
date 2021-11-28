@@ -4,8 +4,8 @@ import org.junit.Assert
 import org.junit.Test
 import za.co.app.creditscore.model.CreditReportInfo
 import za.co.app.creditscore.model.CreditScoreModel
-import za.co.app.creditscore.ui.domain.CreditInfo
-import za.co.app.creditscore.ui.domain.Debt
+import za.co.app.creditscore.ui.models.CreditInfo
+import za.co.app.creditscore.ui.models.Debt
 
 internal class CreditScoreMapperTest {
 

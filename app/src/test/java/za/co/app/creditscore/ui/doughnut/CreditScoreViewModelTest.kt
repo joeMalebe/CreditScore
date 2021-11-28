@@ -2,10 +2,7 @@ package za.co.app.creditscore.ui.doughnut
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -16,9 +13,9 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 import za.co.app.creditscore.model.repository.ICreditScoreRepository
-import za.co.app.creditscore.ui.domain.CreditInfo
-import za.co.app.creditscore.ui.domain.CreditScore
-import java.util.ArrayList
+import za.co.app.creditscore.ui.models.CreditInfo
+import za.co.app.creditscore.ui.models.CreditScore
+import java.util.*
 
 @RunWith(MockitoJUnitRunner::class)
 class CreditScoreViewModelTest {
@@ -47,7 +44,7 @@ class CreditScoreViewModelTest {
         viewModel.viewState.observeForever {
             stateList.add(it)
         }
-        Thread.sleep(4000)
+        Thread.sleep(1000)
         Assert.assertEquals(DoughnutViewState.Loading, stateList[0])
         Assert.assertEquals(DoughnutViewState.CreditScoreLoaded(score), stateList[1])
     }
@@ -66,7 +63,7 @@ class CreditScoreViewModelTest {
             stateList.add(it)
         }
 
-        Thread.sleep(2000)
+        Thread.sleep(1000)
         Assert.assertEquals(DoughnutViewState.Loading, stateList[0])
         Assert.assertEquals(DoughnutViewState.Error, stateList[1])
     }

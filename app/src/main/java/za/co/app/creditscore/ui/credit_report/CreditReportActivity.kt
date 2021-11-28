@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import za.co.app.creditscore.ui.domain.CreditScore
+import za.co.app.creditscore.ui.models.CreditScore
 
 class CreditReportActivity : AppCompatActivity() {
 
