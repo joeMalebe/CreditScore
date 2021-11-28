@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -15,42 +14,38 @@ import org.mockito.junit.MockitoJUnitRunner
 import za.co.app.creditscore.model.repository.ICreditScoreRepository
 import za.co.app.creditscore.ui.models.CreditInfo
 import za.co.app.creditscore.ui.models.CreditScore
-import java.util.*
 
 @RunWith(MockitoJUnitRunner::class)
 class CreditScoreViewModelTest {
 
-    private lateinit var stateList: ArrayList<DoughnutViewState>
-
     @Mock
     lateinit var credRepository: ICreditScoreRepository
-    lateinit var viewModel: CreditScoreViewModel
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    @Before
-    fun setup() {
-        viewModel = CreditScoreViewModel(credRepository)
-        stateList = arrayListOf()
-    }
-
     @Test
     fun loadCreditScore_SuccesFullLoad_ReturnCreditScoreLoadedViewState() = runBlocking {
+        val stateList = arrayListOf<DoughnutViewState>()
         val score = CreditScore(33, 700, CreditInfo())
+        val viewModel = CreditScoreViewModel(credRepository)
         `when`(credRepository.getCreditScoreAsync()).thenReturn(CompletableDeferred((score)))
-        viewModel.loadCreditScore()
+
 
         viewModel.viewState.observeForever {
             stateList.add(it)
         }
-        Thread.sleep(3000)
+        viewModel.loadCreditScore()
+
+        Thread.sleep(1000)
         Assert.assertEquals(DoughnutViewState.Loading, stateList[0])
         Assert.assertEquals(DoughnutViewState.CreditScoreLoaded(score), stateList[1])
     }
 
     @Test
     fun loadCreditScore_ErrorFromRepo_ReturnErrorViewState() = runBlocking {
+        val viewModel = CreditScoreViewModel(credRepository)
+        val stateList = arrayListOf<DoughnutViewState>()
         `when`(credRepository.getCreditScoreAsync()).thenReturn(
             CompletableDeferred(
                 CreditScore(
@@ -58,12 +53,13 @@ class CreditScoreViewModelTest {
                 )
             )
         )
-        viewModel.loadCreditScore()
+
         viewModel.viewState.observeForever {
             stateList.add(it)
         }
+        viewModel.loadCreditScore()
 
-        Thread.sleep(3000)
+        Thread.sleep(1000)
         Assert.assertEquals(DoughnutViewState.Loading, stateList[0])
         Assert.assertEquals(DoughnutViewState.Error, stateList[1])
     }
