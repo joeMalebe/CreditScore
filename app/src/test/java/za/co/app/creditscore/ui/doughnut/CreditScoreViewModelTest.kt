@@ -31,7 +31,6 @@ class CreditScoreViewModelTest {
         val viewModel = CreditScoreViewModel(credRepository)
         `when`(credRepository.getCreditScoreAsync()).thenReturn(CompletableDeferred((score)))
 
-
         viewModel.viewState.observeForever {
             stateList.add(it)
         }

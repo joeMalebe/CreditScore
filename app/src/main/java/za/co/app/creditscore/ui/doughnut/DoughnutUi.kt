@@ -80,7 +80,8 @@ fun Doughnut(creditScore: CreditScore, onClickEvent: () -> Unit) {
                 )
                 .clickable {
                     onClickEvent()
-                }.testTag("doughnut")
+                }
+                .testTag("doughnut")
         ) {
             ProgressBar(creditScore)
             InnerText(creditScore)
@@ -93,7 +94,7 @@ fun MainLayout(creditScore: CreditScore, onClickEvent: () -> Unit) {
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(text = stringResource(id = R.string.clear_score))
-        })
+        }, backgroundColor = colorResource(id = R.color.colorPrimaryLight))
     }, content = {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -124,7 +125,7 @@ fun Loading() {
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(text = stringResource(id = R.string.clear_score))
-        })
+        },backgroundColor = colorResource(id = R.color.colorPrimaryLight))
     }, content = {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -160,7 +161,7 @@ fun Error(onClickEvent: () -> Unit) {
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(text = stringResource(id = R.string.clear_score))
-        })
+        }, backgroundColor = colorResource(id = R.color.colorPrimaryLight))
     }, content = {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -194,7 +195,7 @@ fun Error(onClickEvent: () -> Unit) {
                         )
                     }, onDismissRequest = {}, confirmButton = {
                         Button(onClick = { onClickEvent() }) {
-                            Text("Ok")
+                            Text(stringResource(R.string.ok))
                         }
                     })
                 }

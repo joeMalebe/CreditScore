@@ -71,7 +71,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
 
     //Retrofit
-    implementation "com.squareup.okhttp3:okhttp:4.9.1"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$okhttp3_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
@@ -84,7 +85,11 @@ dependencies {
 
     //hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    kaptTest "com.google.dagger:hilt-android-compiler:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    androidTestImplementation  "com.google.dagger:hilt-android-testing:${hilt_version}"
+    testImplementation  "com.google.dagger:hilt-android-testing:${hilt_version}"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     //tests
     testImplementation 'junit:junit:4.12'
