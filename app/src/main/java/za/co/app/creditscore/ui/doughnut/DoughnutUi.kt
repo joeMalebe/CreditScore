@@ -194,7 +194,7 @@ fun Error(onClickEvent: () -> Unit) {
                         )
                     }, onDismissRequest = {}, confirmButton = {
                         Button(onClick = { onClickEvent() }) {
-                            Text("Ok")
+                            Text(stringResource(R.string.ok))
                         }
                     })
                 }
