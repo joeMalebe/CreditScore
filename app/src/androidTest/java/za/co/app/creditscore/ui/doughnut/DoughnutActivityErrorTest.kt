@@ -27,10 +27,10 @@ internal class DoughnutActivityErrorTest {
     @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
 
-    lateinit var mockWebServer: MockWebServer
-    val context = ApplicationProvider.getApplicationContext<Context>()
+    private lateinit var mockWebServer: MockWebServer
+    private val context: Context = ApplicationProvider.getApplicationContext()
 
-    private lateinit var scenatio: ActivityScenario<DoughnutActivity>
+    private lateinit var scenario: ActivityScenario<DoughnutActivity>
 
     @get:Rule
     val rule = createEmptyComposeRule()
@@ -42,8 +42,8 @@ internal class DoughnutActivityErrorTest {
         mockWebServer.url("http://localhost")
         mockWebServer.dispatcher = errorDispatcher()
 
-        scenatio = ActivityScenario.launch(DoughnutActivity::class.java)
-        scenatio.moveToState(Lifecycle.State.RESUMED)
+        scenario = ActivityScenario.launch(DoughnutActivity::class.java)
+        scenario.moveToState(Lifecycle.State.RESUMED)
     }
 
     @After
@@ -62,7 +62,7 @@ internal class DoughnutActivityErrorTest {
         button.performClick()
     }
 
-    fun errorDispatcher(): Dispatcher {
+    private fun errorDispatcher(): Dispatcher {
         return object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return when (request.path) {

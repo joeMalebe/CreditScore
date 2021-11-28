@@ -32,11 +32,11 @@ internal class DoughnutActivitySuccessTest {
     @get:Rule
     val testRule = createEmptyComposeRule()
 
-    lateinit var mockWebServer: MockWebServer
+    private lateinit var mockWebServer: MockWebServer
 
-    private lateinit var scenatio: ActivityScenario<DoughnutActivity>
+    private lateinit var scenario: ActivityScenario<DoughnutActivity>
 
-    val context = ApplicationProvider.getApplicationContext<Context>()
+    private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Before
     fun setup() {
@@ -45,8 +45,8 @@ internal class DoughnutActivitySuccessTest {
         mockWebServer.url("http://localhost")
         mockWebServer.dispatcher = successDispatcher()
 
-        scenatio = ActivityScenario.launch(DoughnutActivity::class.java)
-        scenatio.moveToState(Lifecycle.State.RESUMED)
+        scenario = ActivityScenario.launch(DoughnutActivity::class.java)
+        scenario.moveToState(Lifecycle.State.RESUMED)
     }
 
     @After
@@ -74,7 +74,7 @@ internal class DoughnutActivitySuccessTest {
         testRule.onNodeWithText(context.getString(R.string.credit_used)).assertExists()
     }
 
-    fun successDispatcher(): Dispatcher {
+    private fun successDispatcher(): Dispatcher {
         return object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return MockResponse().setResponseCode(200).setBody(getJsonContent())
