@@ -184,7 +184,7 @@ fun MainLayout(creditScore: CreditScore) {
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(text = stringResource(id = R.string.credit_info))
-        })
+        }, backgroundColor = colorResource(id = R.color.colorPrimaryLight))
     }, content = {
         Column(
             modifier = Modifier
